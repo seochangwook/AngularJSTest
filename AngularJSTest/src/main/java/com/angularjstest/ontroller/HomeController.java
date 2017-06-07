@@ -16,7 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv) {
+		String name = null;
+		name = "good better!!";
+		
 		mv.setViewName("home");
+		
+		mv.addObject("testvalue", "seochangwook developer");
+		mv.addObject("testvalue2", name);
+		
+		mv.addObject("onevalue", 1);
+		mv.addObject("twovalue", 1);
 		
 		return mv;
 	}
