@@ -27,6 +27,8 @@ public class HomeController {
 		mv.addObject("onevalue", 1);
 		mv.addObject("twovalue", 1);
 		
+		mv.addObject("numvalue", 100);
+		
 		return mv;
 	}
 }
