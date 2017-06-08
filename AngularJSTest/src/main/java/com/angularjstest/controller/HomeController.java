@@ -1,4 +1,4 @@
-package com.angularjstest.ontroller;
+package com.angularjstest.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

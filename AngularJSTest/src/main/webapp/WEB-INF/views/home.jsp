@@ -71,8 +71,8 @@
 <p>value1 : <input type="text" ng-model="value_1"></p>
 <p>value2 : <input type="text" ng-model="value_2"></p>
 <input type="button" value='click here' ng-click="operator()"><br>
-<p>plus 결과: {{retVal.answer}}</p>
-<p>plus 메세지: {{retVal.message}}</p>
+<p>plus 결과: {{res.answer}}</p>
+<p>plus 메세지: {{res.message}}</p>
 </div>
 <br>
 <label>* Angular Array test1(local array data)</label><br>
@@ -116,9 +116,9 @@
 		<tbody>
 		<!-- 복잡하게 forEach를 사용하지 않아도 된다 -->
 		<!-- ng-repeat -> for each item in a collection, used on an array of objects -->
-			<tr ng-repeat="person in developers | orderBy:'age'">
+			<tr ng-repeat="person in developers">
 				<td>{{$index + 1}}</td>
-				<td>{{person.name | uppercase}}</td>
+				<td>{{person.name}}</td>
 				<td>{{person.age}}</td>
 				<td><img src="./resources/images/{{person.photo}}" width="100" height="100"></td>
 				<td><button data-pid='{{person.name}}'>보기</button></td>
@@ -158,7 +158,7 @@ app.controller('clickCtrl2', function($scope){
         	'message':message
 	    }
 		
-		$scope.retVal = trans_objeect;
+		$scope.res = trans_objeect;
 	}
 });
 app.controller('clickCtrl3', function($scope){
@@ -171,7 +171,7 @@ app.controller('clickCtrl3', function($scope){
 	];
 });
 app.controller('clickCtrl4', function($scope, $http){
-	//$http서비스로 Ajax 구현//
+	//AngularJS는 $http서비스로 Ajax 구현//
 	var page = '1';
 	
 	var trans_objeect = 
@@ -185,29 +185,34 @@ app.controller('clickCtrl4', function($scope, $http){
 		url: 'http://localhost:8080/ontroller/angularajax', /* 통신할 URL */
 		data: trans_json, 
 		headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
-	}).then(function Success(response) {
-		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+response.resulte+'</p>',{
+	}).then(function(response){
+        //First function handles success
+		var infodialog = new $.Zebra_Dialog({
 			title: 'AngularJS Test',
-			type: 'information',
+			type: 'confirmation',
 			print: false,
 			width: 760,
+			message:'<strong>Message: $http call result</strong><br><br><p>'+response.data.result+'</p>',
 			buttons: ['닫기'],
 			onClose: function(caption){
 				if(caption == '닫기'){
-					//alert('yes click');
+					
 				}
 			}
 		});
-    }, function Error(response) {
-    	var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+response.result+'</p>',{
+		$scope.developers = response.data.value; //결과를 나타낼 배열모델에 저장//
+    },	function(response){
+        //Second function handles error
+    	var infodialog = new $.Zebra_Dialog({
 			title: 'AngularJS Test',
-			type: 'information',
+			type: 'confirmation',
 			print: false,
 			width: 760,
+			message:'<strong>Message: $http call result</strong><br><br><p>'+response.data+'</p>',
 			buttons: ['닫기'],
 			onClose: function(caption){
 				if(caption == '닫기'){
-					//alert('yes click');
+					
 				}
 			}
 		});
