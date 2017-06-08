@@ -75,7 +75,7 @@
 <p>plus 메세지: {{res.message}}</p>
 </div>
 <br>
-<label>* Angular Array test1(local array data)</label><br>
+<label>* Angular Array test1(local array data, $http service)</label><br>
 <div ng-controller="clickCtrl3">
 	<table border="1">
 		<thead>
@@ -101,7 +101,7 @@
 	</table>
 </div>
 <br>
-<label>* Angular Array test2(server array data)</label><br>
+<label>* Angular Array test2(server array data, $http service)</label><br>
 <div ng-controller="clickCtrl4">
 	<table border="1">
 		<thead>
@@ -125,6 +125,12 @@
 	        </tr>
 	    </tbody>
 	</table>
+</div>
+<br>
+<label>* Angular Service test($interval service)</label><br>
+<div ng-controller="servicecontroller">
+<p>The time is:</p>
+<h1>{{theTime}}</h1>
 </div>
 </body>
 <script type="text/javascript" id="angularjsscript">
@@ -217,6 +223,14 @@ app.controller('clickCtrl4', function($scope, $http){
 			}
 		});
     });
+});
+app.controller('servicecontroller', function($scope, $interval){
+	$scope.theTime = new Date().toLocaleTimeString();
+	
+	//1000초마다 반복//
+	$interval(function () {
+	      $scope.theTime = new Date().toLocaleTimeString();
+	}, 1000);
 });
 </script>
 <script type="text/javascript" id="jqueryscript">
