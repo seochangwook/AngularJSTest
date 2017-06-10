@@ -1,9 +1,14 @@
 /*
  * Module : myApp
  */
-var app = angular.module('myApp', []); //사용할 모듈을 불러온다.//
+var app = angular.module('myApp', ['ngFileUpload']); //사용할 모듈을 불러온다.//
 //모듈의 []의 정의는 사용가능한 의존성 모듈들을 정의. 만약 []가 없다면 새로운 모듈을 만들 수 없다.//
 //AngularJS에서의 데이터 바인딩 표기법은 {{}}이다.//
+//ngFileUpload는 파일업로드 모듈이다.//
+
+//필요한 변수 선언//
+var files = []; //파일이 저장될 배열//
+var filecount = 0;
 ////////////////////////
 app.controller('myCtrl', function($scope){
 	//컨트롤러를 정의하여 해당 컨트롤러가 포함하고 있는(<div~</div>)영역에 의존을 설정한다.(scope)//
@@ -156,3 +161,109 @@ app.controller('extfileCtrl', function($scope){
 	                {name:'Kai',country:'Denmark'}
 	];
 });
+////////////////////////////
+app.controller('formdatainfo', function($scope){
+	$scope.printMsg = 'select animal:';
+	$scope.formdataclick = function(){
+		//일반적으로 scope를 참조하게 되면 value값을 가져온다.//
+		//Checkbox//
+		var checkboxbuttondata1 = $scope.checkoption1;
+		var checkboxbuttondata2 = $scope.checkoption2;
+		if(checkboxbuttondata1 == true){
+			checkboxbuttondata1 = 'Dog';
+		}if(checkboxbuttondata2 == true){
+			checkboxbuttondata2 = 'Cat';
+		}
+		//radiobutton//
+		var radiobuttondata = $scope.myVar2;
+		//selectbutton//
+		var selectbuttondata = $scope.myVar3;
+		
+		var infodialog = new $.Zebra_Dialog({
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			message:'<strong>Message: $http call result</strong><br><br><p>'+checkboxbuttondata1 +'/' + checkboxbuttondata2 + '/' + radiobuttondata + '/' + selectbuttondata +'</p>',
+			buttons: ['닫기'],
+			onClose: function(caption){
+				if(caption == '닫기'){
+					
+				}
+			}
+		});
+	}
+});
+//////////////////////////////
+app.controller('myForm', function($scope){
+	$scope.master = {}; //기존 source//
+	
+	$scope.reset = function(){
+		$scope.user = angular.copy($scope.master);
+	}
+	
+	$scope.update = function(user){
+		var checkboxbuttondata1 = user.favorite1;
+		var checkboxbuttondata2 = user.favorite2;
+		if(checkboxbuttondata1 == true){
+			checkboxbuttondata1 = 'Car';
+		}else if(checkboxbuttondata1 == false){
+			checkboxbuttondata1 = 'not select1';
+		}
+		
+		if(checkboxbuttondata2 == true){
+			checkboxbuttondata2 = "Bus";
+		}else if(checkboxbuttondata2 == false){
+			checkboxbuttondata2 = 'not select2';
+		}
+		
+		console.log('input info: ' + user.name + '/' + user.age + '/' + user.gender + '/' + checkboxbuttondata1 + '/' + checkboxbuttondata2 + '/' + user.topic);
+		angular.copy(user, $scope.master);
+	}
+	
+	$scope.reset();
+	
+});
+////////////////////////////////
+app.controller('fileform', function($scope, $http){
+	$scope.onFileSelect = function($files) {
+		files[filecount] = $files[0];
+
+		filecount++;
+    };
+    $scope.send = function (){
+    	var emailaddress = $scope.email;
+    	
+    	var formData = new FormData();
+    	
+    	var id = 0;
+    	for(var i=0; i<filecount; i++){
+    		if(files[i] == undefined){
+    			
+    		}else{
+    			console.log("uploadfile["+(id++)+"]", files[i]);
+    			formData.append("uploadfile["+(id++)+"]", files[i]);
+    		}
+    	}
+    	
+    	console.log('email address: ' + emailaddress);
+    	
+    	formData.append("email", emailaddress);
+    	
+    	$http({
+    		method: 'POST',
+            url: 'http://localhost:8080/ontroller/enrollajax',
+            data: formData,
+            headers: {
+                'Content-Type': undefined
+            }
+    	}).then(function(response){
+            //First function handles success
+    		console.log('success...');
+        },	function(response){
+            //Second function handles error
+        	console.log('fail...');
+        });
+    }
+})

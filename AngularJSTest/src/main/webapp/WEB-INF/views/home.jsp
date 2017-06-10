@@ -16,6 +16,10 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<!-- AngularJS CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<!-- AngularJS File upload CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
 	<!-- Zebra-Dialog CDN -->
 	<script src="resources/js/dialog/zebra_dialog.src.js"></script>
 	<link rel="stylesheet" href="resources/css/dialog/zebra_dialog.css" type="text/css"/>
@@ -168,6 +172,123 @@
 		{{x.name + ',' + x.country}}
 	</li>
 </ul>
+</div>
+<br>
+<label>* Angular Forms(checkbox, radiobutton, seslect) Test1</label><br>
+<div ng-controller="formdatainfo">
+	<label>1. checkbox</label><br>
+	<p>{{printMsg}}</p>
+	<form>
+		<p>Dog: <input type="checkbox" ng-model="checkoption1"></p>
+		<p>Cat: <input type="checkbox" ng-model="checkoption2"></p><br>
+	</form>
+	<h1 ng-show="checkoption1">Dog Select</h1><br>
+	<h1 ng-show="checkoption2">Cat Select</h1><br>
+	<label>2. radiobutton</label><br>
+	<form>
+		Pick a topic:
+		<input type="radio" ng-model="myVar2" value="dogs">Dogs
+		<input type="radio" ng-model="myVar2" value="tuts">Tutorials
+		<input type="radio" ng-model="myVar2" value="cars">Cars
+	</form>
+	<div ng-switch="myVar2">
+		<div ng-switch-when="dogs">
+			<h1>Dogs</h1>
+			<p>Welcome to a world of dogs</p>
+		</div>
+		<div ng-switch-when="tuts">
+			<h1>Tutorials</h1>
+			<p>Learn from examples</p>
+		</div>
+		<div ng-switch-when="cars">
+			<h1>Cars</h1>
+			<p>Read about cars</p>
+		</div>
+	</div>
+	<br> 
+	<label>3. select</label><br>
+	<form>
+		Select a topic:
+		<select ng-model="myVar3">
+			<option value="">
+			<option value="dogs">Dogs
+			<option value="tuts">Tutorials
+			<option value="cars">Cars
+		</select>
+	</form>
+	<div ng-switch="myVar3">
+		<div ng-switch-when="dogs">
+			<h1>Dogs</h1>
+		</div>
+		<div ng-switch-when="tuts">
+			<h1>Tutorials</h1>
+		</div>
+		<div ng-switch-when="cars">
+			<h1>Cars</h1>
+		</div>
+	</div>
+	<br>
+	<label>4. 선택 결과보기</label><br>
+	<input type="button" value="click" ng-click="formdataclick()">
+</div>
+<br>
+<label>* Angular Forms(checkbox, radiobutton, seslect) Test2 - reset, save</label><br>
+<div ng-controller="myForm">
+	<form novalidate class="simple-form">
+		<label>Name: 
+			<input type="text" ng-model="user.name">
+		</label><br>
+		<label>Age: 
+			<input type="number" ng-model="user.age">
+		</label><br>
+		Gender: 
+		<label>
+			<input type="radio" ng-model="user.gender" value="male" />male</label>
+        <label>
+        	<input type="radio" ng-model="user.gender" value="female" />female</label>
+        <br>
+        <label>Favorite: <br>
+        	1.Car: <input type="checkbox" ng-model="user.favorite1"><br>
+        	2.Bus: <input type="checkbox" ng-model="user.favorite2">
+        	<p ng-show="user.favorite1">Car Select</p>
+        	<p ng-show="user.favorite2">Bus Select</p>
+        </label><br>
+        <label>Topic: <br>
+        	<select ng-model="user.topic">
+				<option value="">
+				<option value="dogs">Dogs
+				<option value="tuts">Tutorials
+				<option value="cars">Cars
+			</select>
+			<div ng-switch="user.topic">
+				<div ng-switch-when="dogs">
+					<p>Dogs select</p>
+				</div>
+				<div ng-switch-when="tuts">
+					<p>Tutorials select</p>
+				</div>
+				<div ng-switch-when="cars">
+					<p>Cars select</p>
+				</div>
+			</div>
+        </label>
+        <br>
+		<button ng-click="reset()">RESET</button>
+		<button ng-click="update(user)">SAVE</button>
+	</form>
+	<pre>form={{user | json}}</pre>
+	<pre>master={{master | json}}</pre>
+</div>
+<br>
+<label>* Angular Forms(text, file) Test3 - file upload</label><br>
+<div ng-controller="fileform">
+	<form>
+		<label>파일</label>
+		<input type="file" ngf-select="onFileSelect($files)" multiple="multiple"><br>
+		<label>이메일: </label>
+		<input type="email" ng-model="email" placeholder="이메일"><br>
+		<button type="button" ng-click="send()">send</button>
+	</form>
 </div>
 </body>
 <script type="text/javascript" id="jqueryscript">
