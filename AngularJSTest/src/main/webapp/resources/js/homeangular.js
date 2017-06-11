@@ -1,5 +1,6 @@
 /*
  * Module : myApp
+ * Source : home.jsp
  */
 var app = angular.module('myApp', ['ngFileUpload']); //사용할 모듈을 불러온다.//
 //모듈의 []의 정의는 사용가능한 의존성 모듈들을 정의. 만약 []가 없다면 새로운 모듈을 만들 수 없다.//
@@ -74,7 +75,7 @@ app.controller('clickCtrl4', function($scope, $http){
 			print: false,
 			width: 760,
 			position: ['right - 20', 'top + 20'],
-			message:'<strong>Message: $http call result</strong><br><br><p>'+response.data.result+'</p>',
+			message:'<strong>Message: $http call result</strong><br><br><p>POST '+response.data.result+'</p>',
 			buttons: ['닫기'],
 			onClose: function(caption){
 				if(caption == '닫기'){
@@ -108,7 +109,7 @@ app.controller("clickCtrl5", function($scope, $http){
 	
 	$http({
 		method: 'GET', //방식
-		url: 'http://localhost:8080/ontroller/angularajaxget/'+page+'/'+number
+		url: 'http://localhost:8080/ontroller/angularajaxget/'+page+'/'+number,
 	}).then(function(response){
         //First function handles success
 		var infodialog = new $.Zebra_Dialog({
@@ -117,7 +118,7 @@ app.controller("clickCtrl5", function($scope, $http){
 			print: false,
 			width: 760,
 			position: ['right - 20', 'top + 20'],
-			message:'<strong>Message: $http call result</strong><br><br><p>'+response.data.value+'</p>',
+			message:'<strong>Message: $http call result</strong><br><br><p>GET '+response.data.result+'</p>',
 			buttons: ['닫기'],
 			onClose: function(caption){
 				if(caption == '닫기'){
@@ -128,7 +129,7 @@ app.controller("clickCtrl5", function($scope, $http){
 		$scope.developers = response.data.value; //결과를 나타낼 배열모델에 저장//
     },	function(response){
         //Second function handles error
-    	var infodialog = new $.Zebra_Dialog({
+    	var infodialg = new $.Zebra_Dialog({
 			title: 'AngularJS Test',
 			type: 'error',
 			print: false,
@@ -223,7 +224,6 @@ app.controller('myForm', function($scope){
 	}
 	
 	$scope.reset();
-	
 });
 ////////////////////////////////
 app.controller('fileform', function($scope, $http){
@@ -261,9 +261,39 @@ app.controller('fileform', function($scope, $http){
     	}).then(function(response){
             //First function handles success
     		console.log('success...');
+    		
+    		var infodialog = new $.Zebra_Dialog({
+    			title: 'AngularJS Test',
+    			type: 'confirmation',
+    			print: false,
+    			width: 760,
+    			position: ['right - 20', 'top + 20'],
+    			message:'<strong>Message: $http call result</strong><br><br><p>'+response.data.retVal+'</p>',
+    			buttons: ['닫기'],
+    			onClose: function(caption){
+    				if(caption == '닫기'){
+    					
+    				}
+    			}
+    		});
         },	function(response){
             //Second function handles error
         	console.log('fail...');
+        	
+        	var infodialog = new $.Zebra_Dialog({
+    			title: 'AngularJS Test',
+    			type: 'error',
+    			print: false,
+    			width: 760,
+    			position: ['right - 20', 'top + 20'],
+    			message:'<strong>Message: $http call result</strong><br><br><p>file upload fail...</p>',
+    			buttons: ['닫기'],
+    			onClose: function(caption){
+    				if(caption == '닫기'){
+    					
+    				}
+    			}
+    		});
         });
     }
 })

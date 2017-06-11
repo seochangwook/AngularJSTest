@@ -58,6 +58,15 @@
     		<artifactId>activation</artifactId>
     		<version>1.1.1</version>
 		</dependency>
+		
+		<!-- CGLib  --> 
+		<dependency> 
+			<groupId>cglib</groupId> 
+			<artifactId>cglib</artifactId> 
+			<version>2.2.2</version> 
+			<type>jar</type> 
+			<scope>compile</scope> 
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>

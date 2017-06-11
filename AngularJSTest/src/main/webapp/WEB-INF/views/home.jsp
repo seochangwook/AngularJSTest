@@ -109,6 +109,13 @@
 <br>
 <label>* Angular Array test2(server array data, $http service - POST)</label><br>
 <div ng-controller="clickCtrl4">
+	<label>검색:</label> <input type="text" ng-model="searchKeyword"/><br>
+	<label>정렬:</label>
+	<select ng-model="orderProperty">
+		<option value="" selected>선택하세요</option>
+		<option value="name" selected>이름</option>
+		<option value="age">나이</option>
+	</select>
 	<table border="1">
 		<thead>
 			<tr>
@@ -122,7 +129,8 @@
 		<tbody>
 		<!-- 복잡하게 forEach를 사용하지 않아도 된다 -->
 		<!-- ng-repeat -> for each item in a collection, used on an array of objects -->
-			<tr ng-repeat="person in developers">
+		<!-- Filter와 Order by를 이용해서 검색과 정렬을 쉽게 한다. -->
+			<tr ng-repeat="person in developers | filter:searchKeyword | orderBy:orderProperty">
 				<td>{{$index + 1}}</td>
 				<td>{{person.name}}</td>
 				<td>{{person.age}}</td>

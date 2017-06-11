@@ -22,7 +22,8 @@ import com.angularjstest.dto.DeveloperDTO;
 @Controller
 public class AjaxController {
 	@RequestMapping(value = "/angularajax", method = RequestMethod.POST, produces = {"application/json"})
-	public @ResponseBody Map<String, Object> getDevelopersList(@RequestBody Map<String, Object> info) {	
+	@ResponseBody
+	public Map<String, Object> getDevelopersList(@RequestBody Map<String, Object> info) {	
 		Map<String, Object> response = new HashMap<String, Object>(); //諛섑솚�븷 ���엯�쓽 �겢�옒�뒪瑜� �꽑�뼵//
 		
 		System.out.println("$http call(post): " + info.get("page").toString());
@@ -46,11 +47,18 @@ public class AjaxController {
 		developerlist.add(developer2);
 		
 		DeveloperDTO developer3 = new DeveloperDTO();
-		developer3.setAge("25");
-		developer3.setName("임꺽정");
-		developer3.setPhoto("error.png");
+		developer3.setAge("15");
+		developer3.setName("홍길한");
+		developer3.setPhoto("confirmation.png");
 		
 		developerlist.add(developer3);
+		
+		DeveloperDTO developer4 = new DeveloperDTO();
+		developer4.setAge("25");
+		developer4.setName("임꺽정");
+		developer4.setPhoto("error.png");
+		
+		developerlist.add(developer4);
 		
 		response.put("result", "success");
 		response.put("value", developerlist);
@@ -59,7 +67,8 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value = "/angularajaxget/{page}/{number}", method = RequestMethod.GET)
-	public Map<String, Object> getDevelopersListget(@PathVariable String page, @PathVariable String number) {
+	@ResponseBody
+	public Map<String, Object> getDevelopersListget(@PathVariable("page") String page, @PathVariable("number") String number) {
 		Map<String, Object> response = new HashMap<String, Object>(); //諛섑솚�븷 ���엯�쓽 �겢�옒�뒪瑜� �꽑�뼵//
 		
 		System.out.println("$http call(get): " + page + "/" + number);
