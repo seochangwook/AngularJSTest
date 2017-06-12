@@ -2,7 +2,11 @@
  * Module : myApp
  * Source : home.jsp
  */
-var app = angular.module('myApp', ['ngFileUpload', 'ngRoute', 'ui.router']); //사용할 모듈을 불러온다.//
+var app = angular.module('myApp', [
+	'ngFileUpload', 
+	'ngRoute', 
+	'ui.router'
+]); //사용할 모듈을 불러온다.//
 //모듈의 []의 정의는 사용가능한 의존성 모듈들을 정의. 만약 []가 없다면 새로운 모듈을 만들 수 없다.//
 //AngularJS에서의 데이터 바인딩 표기법은 {{}}이다.//
 //ngFileUpload는 파일업로드 모듈이다.//
@@ -10,6 +14,24 @@ var app = angular.module('myApp', ['ngFileUpload', 'ngRoute', 'ui.router']); //�
 //필요한 변수 선언//
 var files = []; //파일이 저장될 배열//
 var filecount = 0;
+////////////////////////
+app.controller('btnCtrl1', function($scope){
+	$scope.btn_click = function(value){
+		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>['+value+']</p>',{
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			buttons: ['닫기'],
+			onClose: function(caption){
+				if(caption == '닫기'){
+					//alert('yes click');
+				}
+			}
+		});
+	}
+});
 ////////////////////////
 app.controller('myCtrl', function($scope){
 	//컨트롤러를 정의하여 해당 컨트롤러가 포함하고 있는(<div~</div>)영역에 의존을 설정한다.(scope)//

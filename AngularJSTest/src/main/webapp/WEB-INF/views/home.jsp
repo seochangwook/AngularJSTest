@@ -53,9 +53,9 @@
 </div>
 <br>
 <label>* expression, ng-model의 관계</label><br>
-<div id="testdiv2">
+<div id="testdiv2" ng-controller="btnCtrl1">
 	<p>Name: <input type="text" ng-model="value"></p>
-	<input type="button" id="btn_test1", value='{{value}}'>
+	<input type="button" ng-click="btn_click(this.value)", value='{{value}}'>
 </div>
 <br>
 <label>* Angular Module, controllers 특징 1(controller directive)</label><br>
@@ -341,25 +341,4 @@
 <div ui-view></div>
 <div>
 </body>
-<script type="text/javascript" id="jqueryscript">
-$(function(){
-	$('#btn_test1').click(function(){
-		var value = $('#btn_test1').val();
-		
-		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+value+'</p>',{
-			title: 'AngularJS Test',
-			type: 'information',
-			print: false,
-			width: 760,
-			position: ['right - 20', 'top + 20'],
-			buttons: ['닫기'],
-			onClose: function(caption){
-				if(caption == '닫기'){
-					//alert('yes click');
-				}
-			}
-		});
-	});
-});
-</script>
 </html>
