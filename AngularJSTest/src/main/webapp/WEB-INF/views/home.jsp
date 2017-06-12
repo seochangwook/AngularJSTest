@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<!-- AngularJS CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 	<!-- AngularJS File upload CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
@@ -270,12 +272,7 @@
         	<p ng-show="user.favorite2">Bus Select</p>
         </label><br>
         <label>Topic: <br>
-        	<select ng-model="user.topic">
-				<option value="">
-				<option value="dogs">Dogs
-				<option value="tuts">Tutorials
-				<option value="cars">Cars
-			</select>
+        	<select ng-model="user.topic" ng-options="x for x in topics"></select>
 			<div ng-switch="user.topic">
 				<div ng-switch-when="dogs">
 					<p>Dogs select</p>
@@ -327,6 +324,22 @@
 </p>
 </form>
 <br>
+<label>* Angular Router Test 1(ngRoute)</label><br>
+<a href="#!london">City 1</a>
+<a href="#!paris">City 2</a>
+<p>Click on the links.</p>
+<!-- ng-view는 페이지 주입 위치이다. -->
+<div ng-view></div>
+<br>
+<label>* Angular Router Test 2(UIRoute)</label><br>
+<!-- ui-view는 페이지 주입 위치이다. -->
+<!-- article.html --> 
+<a href="#!header">Header</a>
+<a href="#!body">Body</a>
+<a href="#!footer">Footer</a>
+<p>Click on the links.</p>
+<div ui-view></div>
+<div>
 </body>
 <script type="text/javascript" id="jqueryscript">
 $(function(){

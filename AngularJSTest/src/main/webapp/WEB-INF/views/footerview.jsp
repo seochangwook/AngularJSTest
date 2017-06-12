@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>one page</p>
-<p>{{msg}}</p>
-<input type="button" ng-click="testclick()" value="button click">
+<p>Footer view!!</p>
+<p>{{footermsg}}</p>
+<input type="button" ng-click="testclick()" value="footer button click">
 </body>
 </html>

@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>one page</p>
-<p>{{msg}}</p>
-<input type="button" ng-click="testclick()" value="button click">
+<p>Header view!!</p>
+<p>{{headermsg}}</p>
+<input type="button" ng-click="testclick()" value="header button click">
 </body>
 </html>

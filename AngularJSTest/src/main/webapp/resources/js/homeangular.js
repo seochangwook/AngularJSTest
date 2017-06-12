@@ -2,7 +2,7 @@
  * Module : myApp
  * Source : home.jsp
  */
-var app = angular.module('myApp', ['ngFileUpload']); //사용할 모듈을 불러온다.//
+var app = angular.module('myApp', ['ngFileUpload', 'ngRoute', 'ui.router']); //사용할 모듈을 불러온다.//
 //모듈의 []의 정의는 사용가능한 의존성 모듈들을 정의. 만약 []가 없다면 새로운 모듈을 만들 수 없다.//
 //AngularJS에서의 데이터 바인딩 표기법은 {{}}이다.//
 //ngFileUpload는 파일업로드 모듈이다.//
@@ -307,6 +307,7 @@ app.controller('formdatainfo', function($scope){
 //////////////////////////////
 app.controller('myForm', function($scope){
 	$scope.master = {}; //기존 source//
+	$scope.topics = ["dogs", "tuts", "cars"]; //dropdown data//
 	
 	$scope.reset = function(){
 		$scope.user = angular.copy($scope.master);
@@ -415,3 +416,64 @@ app.controller('validateCtrl', function($scope){
 	}
 });
 /////////////////////////////////////
+//라우터로 여러 jsp를 관리하므로 SPA(Single Page Application) 가능//
+app.config(function($routeProvider){
+	$routeProvider
+	.when("/london", {
+		templateUrl : "onepage",
+		controller : "londonCtrl"
+	})
+	.when("/paris", {
+		templateUrl : "twopage",
+		controller : "parisCtrl"
+	});
+});
+/* Router Controller */
+app.controller("londonCtrl", function($scope){
+	console.log('controller london');
+	$scope.msg = "one page view!!";
+	
+	$scope.testclick = function(){
+		console.log('click one page button');
+	}
+});
+app.controller("parisCtrl", function($scope){
+	console.log('controller paris');
+	$scope.msg = "two page view!!"
+});
+////////////////////////////////////////
+//라우터로 여러 jsp를 관리하므로 SPA(Single Page Application) 가능 - 향상//
+app.config(['$stateProvider', function($stateProvider){
+	$stateProvider
+	.state('header',{
+		url: '/header',
+		templateUrl: 'header',
+		controller: 'headerCtrl'
+	})
+	.state('body', {
+		url: '/body',
+		templateUrl: 'body',
+		controller: 'bodyCtrl'
+	})
+	.state('footer', {
+		url: '/footer',
+		templateUrl: 'footer',
+		controller: 'footerCtrl'
+	})
+}]);
+/* Router Controller */
+app.controller('headerCtrl', function($scope){
+	$scope.testclick = function(){
+		console.log('click header page button');
+	}
+});
+app.controller('bodyCtrl', function($scope){
+	$scope.testclick = function(){
+		console.log('click body page button');
+	}
+});
+app.controller('footerCtrl', function($scope){
+	$scope.testclick = function(){
+		console.log('click footer page button');
+	}
+});

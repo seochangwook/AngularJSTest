@@ -31,4 +31,39 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/onepage", method = RequestMethod.GET)
+	public ModelAndView Onepageview(ModelAndView mv) {
+		mv.setViewName("Onepage");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/twopage", method = RequestMethod.GET)
+	public ModelAndView Twopageview(ModelAndView mv) {
+		mv.setViewName("Twopage");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/header", method = RequestMethod.GET)
+	public ModelAndView Headeroneview(ModelAndView mv) {
+		mv.setViewName("headerview");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/body", method = RequestMethod.GET)
+	public ModelAndView Bodyview(ModelAndView mv) {
+		mv.setViewName("bodyview");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/footer", method = RequestMethod.GET)
+	public ModelAndView Footerview(ModelAndView mv) {
+		mv.setViewName("footerview");
+		
+		return mv;
+	}
 }
