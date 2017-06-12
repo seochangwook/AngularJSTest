@@ -80,7 +80,7 @@ public class AjaxController {
 		DeveloperDTO developer1 = new DeveloperDTO();
 		developer1.setAge("20");
 		developer1.setName("잭");
-		developer1.setPhoto("people.PNG");
+		developer1.setPhoto("243.PNG");
 		
 		developerlist.add(developer1);
 		

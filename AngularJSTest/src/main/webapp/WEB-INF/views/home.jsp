@@ -145,7 +145,7 @@
 <br>
 <label>* Angular Array test3(server array data, $http service - GET)</label><br>
 <div ng-controller="clickCtrl5">
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>구분</th>
@@ -162,7 +162,7 @@
 				<td>{{$index + 1}}</td>
 				<td>{{person.name}}</td>
 				<td>{{person.age}}</td>
-				<td><img ng-src="./resources/images/{{person.photo}}" width="100" height="100"></td>
+				<td><img class="img-circle" ng-src="./resources/images/{{person.photo}}" width="100" height="100"></td>
 				<td><button ng-click="printItem(person)">보기</button></td>
 	        </tr>
 	    </tbody>
@@ -228,13 +228,19 @@
 	</form>
 	<div ng-switch="myVar3">
 		<div ng-switch-when="dogs">
-			<h1>Dogs</h1>
+			<div class="alert alert-info">
+  				<strong>Info!</strong>Dogs Select
+			</div>
 		</div>
 		<div ng-switch-when="tuts">
-			<h1>Tutorials</h1>
+			<div class="alert alert-info">
+  				<strong>Info!</strong>Tutorial Select
+			</div>
 		</div>
 		<div ng-switch-when="cars">
-			<h1>Cars</h1>
+			<div class="alert alert-info">
+  				<strong>Info!</strong>Cars Select
+			</div>
 		</div>
 	</div>
 	<br>
