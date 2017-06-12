@@ -101,7 +101,7 @@
 				<td>{{person.name | uppercase}}</td>
 				<td>{{person.age}}</td>
 				<td><img ng-src="./resources/images/{{person.photo}}" width="100" height="100"></td>
-				<td><button data-pid='{{person.name}}'>보기</button></td>
+				<td><button  ng-click="printItem(person)">보기</button></td>
 	        </tr>
 	    </tbody>
 	</table>
@@ -124,6 +124,7 @@
 				<th>나이</th>
 				<th>사진</th>
 				<th>정보</th>
+				<th>제거</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -135,7 +136,8 @@
 				<td>{{person.name}}</td>
 				<td>{{person.age}}</td>
 				<td><img ng-src="./resources/images/{{person.photo}}" width="100" height="100"></td>
-				<td><button data-pid='{{person.name}}'>보기</button></td>
+				<td><button ng-click="printItem(person)">보기</button></td>
+				<td><button ng-click="deleteItem(person)">제거</button></td>
 	        </tr>
 	    </tbody>
 	</table>
@@ -161,7 +163,7 @@
 				<td>{{person.name}}</td>
 				<td>{{person.age}}</td>
 				<td><img ng-src="./resources/images/{{person.photo}}" width="100" height="100"></td>
-				<td><button data-pid='{{person.name}}'>보기</button></td>
+				<td><button ng-click="printItem(person)">보기</button></td>
 	        </tr>
 	    </tbody>
 	</table>
@@ -298,26 +300,30 @@
 		<button type="button" ng-click="send()">send</button>
 	</form>
 </div>
+<br>
+<label>* Angular Forms Test4 - Validation Check</label><br>
+<form ng-controller="validateCtrl" name="myForm" novalidate="novalidate">
+<p>Username:<br>
+<input type="text" name="user" ng-model="user" required="required">
+<span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+<span ng-show="myForm.user.$error.required">Username is required.</span>
+</span>
+</p>
+<p>Email:<br>
+<input type="email" name="email" ng-model="email" required="required">
+<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+<span ng-show="myForm.email.$error.required">Email is required.</span>
+<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+</span>
+</p>
+<!-- Form에 예외처리를 한다. -->
+<p><input type="button" ng-disabled="myForm.user.$dirty && myForm.user.$invalid || myForm.email.$dirty && myForm.email.$invalid" value="click" ng-click="save(user, email)">
+</p>
+</form>
+<br>
 </body>
 <script type="text/javascript" id="jqueryscript">
 $(function(){
-	$("[data-pid]").on("click", function(){    
-		var selUserName = $(this).data("pid");
-		
-		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+selUserName+'</p>',{
-			title: 'AngularJS Test',
-			type: 'information',
-			print: false,
-			width: 760,
-			position: ['right - 20', 'top + 20'],
-			buttons: ['닫기'],
-			onClose: function(caption){
-				if(caption == '닫기'){
-					//alert('yes click');
-				}
-			}
-		});
-	});
 	$('#btn_test1').click(function(){
 		var value = $('#btn_test1').val();
 		

@@ -50,6 +50,22 @@ app.controller('clickCtrl3', function($scope){
   		{name: "Wesley", age: "25", photo:"confirmation.png"},
   		{name: "Krzysztof", age: "6", photo:"information.png"}
 	];
+	
+	$scope.printItem = function(person){
+		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+person.name+'</p>',{
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			buttons: ['닫기'],
+			onClose: function(caption){
+				if(caption == '닫기'){
+					//alert('yes click');
+				}
+			}
+		});
+	}
 });
 ///////////////////////////
 app.controller('clickCtrl4', function($scope, $http){
@@ -101,6 +117,82 @@ app.controller('clickCtrl4', function($scope, $http){
 			}
 		});
     });
+	
+	$scope.printItem = function(person){
+		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+person.name+'</p>',{
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			buttons: ['닫기'],
+			onClose: function(caption){
+				if(caption == '닫기'){
+					//alert('yes click');
+				}
+			}
+		});
+	}
+	
+	$scope.deleteItem = function(person){
+		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>['+person.name+'] remove?</p>',{
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			buttons: ['제거', '취소'],
+			onClose: function(caption){
+				if(caption == '제거'){
+					console.log('remove' + person.name);
+					
+					$http({
+						method: 'POST', //방식
+						url: 'http://localhost:8080/ontroller/deletelistajax',
+						data: trans_json, 
+						headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+					}).then(function(response){
+				        //First function handles success
+						var infodialog = new $.Zebra_Dialog({
+							title: 'AngularJS Test',
+							type: 'confirmation',
+							print: false,
+							width: 760,
+							position: ['right - 20', 'top + 20'],
+							message:'<strong>Message: $http call result</strong><br><br><p>POST '+response.data.result+'</p>',
+							buttons: ['닫기'],
+							onClose: function(caption){
+								if(caption == '닫기'){
+									
+								}
+							}
+						});
+						$scope.developers = response.data.value; //결과를 나타낼 배열모델에 저장//
+				    },	function(response){
+				        //Second function handles error
+				    	var infodialg = new $.Zebra_Dialog({
+							title: 'AngularJS Test',
+							type: 'error',
+							print: false,
+							width: 760,
+							position: ['right - 20', 'top + 20'],
+							message:'<strong>Message: $http call result</strong><br><br><p>'+response.data+'</p>',
+							buttons: ['닫기'],
+							onClose: function(caption){
+								if(caption == '닫기'){
+									
+								}
+							}
+						});
+				    });
+				}
+				
+				else if(caption == '취소'){
+					console.log('remove cancel');
+				}
+			}
+		});
+	}
 });
 //////////////////////////
 app.controller("clickCtrl5", function($scope, $http){
@@ -144,6 +236,22 @@ app.controller("clickCtrl5", function($scope, $http){
 			}
 		});
     });
+	
+	$scope.printItem = function(person){
+		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>'+person.name+'</p>',{
+			title: 'AngularJS Test',
+			type: 'information',
+			print: false,
+			width: 760,
+			position: ['right - 20', 'top + 20'],
+			buttons: ['닫기'],
+			onClose: function(caption){
+				if(caption == '닫기'){
+					//alert('yes click');
+				}
+			}
+		});
+	}
 });
 /////////////////////////////
 app.controller('servicecontroller', function($scope, $interval){
@@ -296,4 +404,14 @@ app.controller('fileform', function($scope, $http){
     		});
         });
     }
-})
+});
+/////////////////////////////////////
+app.controller('validateCtrl', function($scope){
+	$scope.user = "John Doe";
+	$scope.email = "john.doe@gmail.com";
+	
+	$scope.save = function(user, email){
+		console.log('user: ' + user + '/ email: ' + email);
+	}
+});
+/////////////////////////////////////

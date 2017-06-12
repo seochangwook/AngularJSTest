@@ -155,4 +155,42 @@ public class AjaxController {
 		
 		return retVal;
 	}
+	
+	@RequestMapping(value = "/deletelistajax", method = RequestMethod.POST, produces = {"application/json"})
+	@ResponseBody
+	public Map<String, Object> deletepersList(@RequestBody Map<String, Object> info) {	
+		Map<String, Object> response = new HashMap<String, Object>(); //諛섑솚�븷 ���엯�쓽 �겢�옒�뒪瑜� �꽑�뼵//
+		
+		System.out.println("$http call(post): " + info.get("page").toString());
+		
+		//데이터 초기화(DAO)//
+		List<DeveloperDTO>developerlist = new ArrayList<DeveloperDTO>();
+		
+		//개발자 정보설정//
+		DeveloperDTO developer1 = new DeveloperDTO();
+		developer1.setAge("20");
+		developer1.setName("서창욱");
+		developer1.setPhoto("question.png");
+		
+		developerlist.add(developer1);
+		
+		DeveloperDTO developer2 = new DeveloperDTO();
+		developer2.setAge("10");
+		developer2.setName("홍길동");
+		developer2.setPhoto("information.png");
+		
+		developerlist.add(developer2);
+		
+		DeveloperDTO developer3 = new DeveloperDTO();
+		developer3.setAge("15");
+		developer3.setName("홍길한");
+		developer3.setPhoto("confirmation.png");
+		
+		developerlist.add(developer3);
+		
+		response.put("result", "success");
+		response.put("value", developerlist);
+		
+		return response;
+	}
 }
