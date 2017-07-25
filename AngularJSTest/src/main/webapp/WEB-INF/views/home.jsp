@@ -52,6 +52,11 @@
 	<p>My Second expression: {{${onevalue}+${twovalue}}}</p>
 </div>
 <br>
+<label>* My Directive</label><br>
+<div>
+	<my-directive></my-directive>
+</div>
+<br>
 <label>* expression, ng-model의 관계</label><br>
 <div id="testdiv2" ng-controller="btnCtrl1">
 	<p>Name: <input type="text" ng-model="value"></p>
@@ -114,8 +119,8 @@
 	<label>검색:</label> <input type="text" ng-model="searchKeyword"/><br>
 	<label>정렬:</label>
 	<select ng-model="orderProperty">
-		<option value="" selected>선택하세요</option>
-		<option value="name" selected>이름</option>
+		<option value="">선택하세요</option>
+		<option value="name">이름</option>
 		<option value="age">나이</option>
 	</select>
 	<table border="1">

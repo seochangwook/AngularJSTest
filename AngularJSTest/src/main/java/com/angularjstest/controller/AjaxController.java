@@ -131,7 +131,7 @@ public class AjaxController {
 		    
 		    String fileName_original = mFile.getOriginalFilename();
 		    //현재 프로젝트(서버)의 resources 경로//
-		    String file_save_path = "/Users/macbook/git/AngularJSTest/AngularJSTest/src/main/webapp/resources/upload/";
+		    String file_save_path = "/Users/macbook/git/AngularJSTest/angular/AngularJSTest/src/main/webapp/resources/upload/";
 		             
 		    try {
 		    	mFile.transferTo(new File(file_save_path+fileName_original));

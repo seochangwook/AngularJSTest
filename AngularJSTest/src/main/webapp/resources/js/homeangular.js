@@ -15,6 +15,12 @@ var app = angular.module('myApp', [
 var files = []; //파일이 저장될 배열//
 var filecount = 0;
 ////////////////////////
+app.directive("myDirective", function(){
+	return {
+		template : "<h1>Hello My Directive</h1>"
+	};
+});
+////////////////////////
 app.controller('btnCtrl1', function($scope){
 	$scope.btn_click = function(value){
 		var infodialog = new $.Zebra_Dialog('<strong>Message:</strong><br><br><p>['+value+']</p>',{
